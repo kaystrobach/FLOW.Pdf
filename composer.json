@@ -1,0 +1,8 @@
+{
+	"name": "KayStrobach/Pdf",
+	"type": "library",
+	"require": {
+		"dompdf/dompdf": "@dev",
+		"mpdf/mpdf": "@dev"
+	}
+}
