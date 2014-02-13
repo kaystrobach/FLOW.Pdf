@@ -1,5 +1,5 @@
 {
-	"name": "KayStrobach/Pdf",
+	"name": "kaystrobach/pdf",
 	"type": "library",
 	"require": {
 		"dompdf/dompdf": "@dev",
