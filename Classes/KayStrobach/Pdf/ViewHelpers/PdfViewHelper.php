@@ -1,0 +1,55 @@
+<?php
+namespace KayStrobach\Pdf\ViewHelpers;
+
+/*                                                                        *
+ * This script belongs to the TYPO3 Flow package "SBS.LaPo".              *
+ *                                                                        *
+ *                                                                        */
+
+use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Flow\Mvc\Exception\StopActionException;
+
+class PdfViewHelper extends \TYPO3\Fluid\Core\ViewHelper\AbstractViewHelper{
+
+	/**
+	 * @var int
+	 */
+	protected $errorReporting = 0;
+
+	function initializeArguments() {
+		$this->registerArgument('debug',               'boolean', 'debug or not',                0, 0);
+		$this->registerArgument('disable',             'boolean', 'disable PDF, output html',    0, 0);
+		$this->registerArgument('filename',            'string',  'filename for download',       0, 'pdf-' . time() . '.pdf');
+		$this->registerArgument('papersize',           'string',  'set the papersize',           0, 'A4');
+		$this->registerArgument('orientation',         'string',  'set the orientation',         0, 'portrait');
+		$this->registerArgument('basepath',            'string',  'set the basepath',            0, '');
+		$this->registerArgument('dpi',                 'integer', 'set the quality of the pdf',  0, '96');
+		$this->registerArgument('enableHtml5Parser',   'boolean', 'html5parser or not',          0, 1);
+		$this->registerArgument('enableCssFloat',      'boolean', 'css floating or not',         0, 1);
+		$this->registerArgument('renderer',             'string', 'define the pdf renderer',     0, 'MPdf');
+	}
+
+	/**
+	 *
+	 * @throws \TYPO3\Flow\Mvc\Exception\StopActionException
+	 * @return string the rendered string
+	 */
+	public function render() {
+		if(!$this->arguments['disable']) {
+			if($this->arguments['renderer'] === 'mpdf') {
+				$renderer = new \KayStrobach\Pdf\ViewHelpers\Renderer\MPdfRenderer();
+			} else {
+				$renderer = new \KayStrobach\Pdf\ViewHelpers\Renderer\DomPdfRenderer();
+			}
+
+
+			$renderer->init($this->arguments);
+			$renderer->render($this->renderChildren());
+		} else {
+			return $this->renderChildren();
+		}
+
+		//use instead of exit ;)
+		throw new StopActionException();
+	}
+}

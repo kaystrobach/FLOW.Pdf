@@ -1,0 +1,30 @@
+#                                                                        #
+# Configuration for the TYPO3 Flow Framework                             #
+#                                                                        #
+# This file contains the default base configuration for the TYPO3 Flow   #
+# Framework. Don't modify this file but add configuration options to     #
+# the Settings.yaml file in the in global Configuration/ directory       #
+# instead.                                                               #
+#                                                                        #
+
+TYPO3:
+
+  Flow:
+
+    object:
+
+      # If enabled, the Object Manager will - additionally to the class files found
+      # in the "Classes" directory - also register class files found in the directory
+      # "Tests/Functional/". Enabling this feature obviously only makes sense in a
+      # testing context.
+      registerFunctionalTestClasses: FALSE
+
+      # Exclude classes from object management (Reflection and Configuration building).
+      # Sequence of package keys (a * as wildcard as last character is allowed) each
+      # with a sequence of regular expressions.
+      # Each regular expression will be tested against the list of fully qualified
+      # class names in the package and classes will be excluded if matching.
+      excludeClasses:
+        'mpdf.*': ['.*']
+        'dompdf': ['.*']
+        

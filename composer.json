@@ -4,5 +4,10 @@
 	"require": {
 		"dompdf/dompdf": "@dev",
 		"mpdf/mpdf": "@dev"
+	},
+	"autoload":{
+		"psr-0":{
+			"KayStrobach\\Pdf":"Classes"
+		}
 	}
 }
