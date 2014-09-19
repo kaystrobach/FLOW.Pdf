@@ -1,6 +1,6 @@
 {
 	"name": "kaystrobach/pdf",
-	"type": "library",
+	"type": "typo3-flow-package",
 	"require": {
 		"dompdf/dompdf": "@dev",
 		"mpdf/mpdf": "@dev"
