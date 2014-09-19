@@ -2,8 +2,6 @@
 	"name": "kaystrobach/pdf",
 	"type": "typo3-flow-package",
 	"require": {
-		"dompdf/dompdf": "@dev",
-		"mpdf/mpdf": "@dev"
 	},
 	"autoload":{
 		"psr-0":{
