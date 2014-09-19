@@ -11,8 +11,13 @@ class DomPdfRenderer extends AbstractRenderer {
 		// the flow way
 		// https://github.com/dompdf/dompdf/wiki/DOMPDF-and-Composer-Quick-start-guide
 		define('DOMPDF_ENABLE_AUTOLOAD',    false);
-		require_once(FLOW_PATH_PACKAGES . 'Libraries/dompdf/dompdf/dompdf_config.inc.php');
-		require_once(FLOW_PATH_PACKAGES . 'Libraries/dompdf/dompdf/include/autoload.inc.php');
+		$autoloadDir = 'Libraries/dompdf/dompdf/';
+		if(is_dir($autoloadDir)) {
+			require_once(FLOW_PATH_PACKAGES . $autoloadDir . 'dompdf_config.inc.php');
+			require_once(FLOW_PATH_PACKAGES . $autoloadDir . 'include/autoload.inc.php');
+		} else {
+			throw new \Exception('please add dompdf/dompdf to your composer.json and install it');
+		}
 	}
 
 	/**
