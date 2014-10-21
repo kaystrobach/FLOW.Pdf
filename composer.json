@@ -1,7 +1,7 @@
 {
 	"name": "kaystrobach/pdf",
 	"type": "typo3-flow-package",
-	"description": "Render Fluid generated HTML as pdf on the fly",
+	"description": "Convert HTML directly to PDF on the fly, using the mpdf or dompdf library.",
 	"require": {
 	},
 	"autoload":{
