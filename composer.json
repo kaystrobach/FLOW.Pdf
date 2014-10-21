@@ -1,6 +1,7 @@
 {
 	"name": "kaystrobach/pdf",
 	"type": "typo3-flow-package",
+	"description": "Render Fluid generated HTML as pdf on the fly",
 	"require": {
 	},
 	"autoload":{
