@@ -1,9 +1,14 @@
 FLOW.Pdf
 ========
 
-This Package makes it possible to convert the rendered HTML directly to PDF on the fly using the mpdf library.
+This Package makes it possible to convert the rendered HTML directly to PDF on the fly, using the mpdf or dompdf library.
+To achieve the on the fly rendering easily it uses a fluid viewhelper.
 
-So it's quite easy to create PDFs on the fly.
+You need one of these package installed via composer, the package itself checks if the library is missing and asks you to install it.
+
+* dompdf/dompdf
+* mpdf/mpdf
+
 
 Example useage in a FLOW Package called Some.Package
 ----------------------------------------------------
