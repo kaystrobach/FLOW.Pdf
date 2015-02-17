@@ -13,7 +13,16 @@ You need one of these package installed via composer, the package itself checks 
 Example useage in a FLOW Package called Some.Package
 ----------------------------------------------------
 
-Taken from project/Packages/Application/Some.Package/Resources/Private/Layouts/Pdf.html
+In a FLOW Layout you can wrap your generated HTML with the following ViewHelper and the output gets transformed into a PDF.
+
+```
+{namespace pdf=KayStrobach\Pdf\ViewHelpers}
+<pdf:pdf enableHtml5Parser="1" disable="0" debug="1" dpi="120" renderer="mpdf">
+	some html content
+</pdf:pdf>
+```
+A complete example may look like:
+(Taken from project/Packages/Application/Some.Package/Resources/Private/Layouts/Pdf.html)
 ```
 {namespace pdf=KayStrobach\Pdf\ViewHelpers}
 <pdf:pdf enableHtml5Parser="1" disable="0" debug="1" dpi="120" renderer="mpdf">
