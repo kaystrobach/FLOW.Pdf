@@ -1,5 +1,5 @@
-FLOW.Pdf
-========
+FLOW.Pdf (For the TYPO3 Flow Framework)
+=======================================
 
 This Package makes it possible to convert the rendered HTML directly to PDF on the fly, using the mpdf or dompdf library.
 To achieve the on the fly rendering easily it uses a fluid viewhelper.
