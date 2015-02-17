@@ -21,6 +21,9 @@ In a FLOW Layout you can wrap your generated HTML with the following ViewHelper 
 	some html content
 </pdf:pdf>
 ```
+
+The parameter documentation can be obtained from the viewHelper directly see Classes/KayStrobach/Pdf/ViewHelpers/PdfViewHelper.php
+
 A complete example may look like:
 (Taken from project/Packages/Application/Some.Package/Resources/Private/Layouts/Pdf.html)
 ```
