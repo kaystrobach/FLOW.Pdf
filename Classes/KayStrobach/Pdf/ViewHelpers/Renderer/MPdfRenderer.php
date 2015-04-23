@@ -2,7 +2,16 @@
 
 namespace KayStrobach\Pdf\ViewHelpers\Renderer;
 
+use TYPO3\Flow\Annotations as Flow;
+
+
 class MPdfRenderer extends AbstractRenderer {
+
+	/**
+	 * @Flow\Inject
+	 * @var \TYPO3\Flow\Utility\Environment
+	 */
+	protected $environment;
 
 	/**
 	 *
@@ -10,6 +19,8 @@ class MPdfRenderer extends AbstractRenderer {
 	protected function initLibrary() {
 		if(!class_exists('mPDF', FALSE)) {
 			$autoloadPath = FLOW_PATH_PACKAGES . 'Libraries/mpdf/mpdf/mpdf.php';
+			define('_MPDF_TTFONTDATAPATH', $this->environment->getPathToTemporaryDirectory());
+			define('_MPDF_TEMP_PATH', $this->environment->getPathToTemporaryDirectory());
 			if(is_file($autoloadPath)) {
 				require_once($autoloadPath);
 			} else {
