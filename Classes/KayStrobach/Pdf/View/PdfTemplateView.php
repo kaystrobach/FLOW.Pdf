@@ -30,7 +30,7 @@ class PdfTemplateView extends TemplateView {
 		'papersize'         => array('A4',            'set the papersize',           'string'),
 		'orientation'       => array('portrait',      'set the orientation',         'string'),
 		'basepath'          => array('',              'set the basepath',            'string'),
-		'dpi'               => array(96,              'set the quality of the pdf',  'integer'),
+		'dpi'               => array(120,              'set the quality of the pdf',  'integer'),
 		'enableHtml5Parser' => array(TRUE,            'html5parser or not',          'boolean'),
 		'enableCssFloat'    => array(TRUE,            'css floating or not',         'boolean'),
 		'renderer'          => array('MPdf',          'define the pdf renderer',     'string'),
