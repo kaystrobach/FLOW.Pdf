@@ -90,3 +90,47 @@ A complete example may look like:
 	</html>
 </pdf:pdf>
 ```
+
+Defining headers and footers
+----------------------------
+
+Place this in the head
+
+```
+		<style>
+			@page {
+				header: html_Header;
+				footer: html_Footer;
+			}
+		</style>
+```
+
+and something like this in the body:
+
+```
+		<htmlpageheader name="Header">
+			<div style="text-align: right; border-bottom: 1px solid #000000; font-weight: bold; font-size: 10pt;">
+				<f:render section="Title" optional="1" />
+			</div>
+		</htmlpageheader>
+
+		<htmlpagefooter name="Footer">
+			<f:if condition="{f:render(section:'footer', optional:true)}">
+				<f:then>
+					<f:render section="Title" optional="1" />
+				</f:then>
+				<f:else>
+					<div style="text-align:center; border-top: 1px solid #000000;">
+						<small>Seite {PAGENO} von {nbpg} - Ausdruck vom {DATE d.m.Y H:i}</small>
+					</div>
+				</f:else>
+			</f:if>
+		</htmlpagefooter>
+```
+
+Rendering barcodes
+------------------
+
+```
+<barcode code="{barcode}" type="C39" size="0.8" height="0.6" />
+```
