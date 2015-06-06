@@ -10,7 +10,32 @@ You need one of these package installed via composer, the package itself checks 
 * mpdf/mpdf
 
 
-Example useage in a FLOW Package called Some.Package
+Controller Usage
+----------------
+
+The recent version of the package contains a new view.
+This view can be included directly in the controller e.g. like this:
+
+```
+class FormulareController extends \TYPO3\Flow\Mvc\Controller\ActionController {
+	/**
+	 * @Flow\Inject
+	 * @var \SBS\LaPo\Domain\Repository\StudentRepository
+	 */
+	protected $studentRepository;
+
+	/**
+	 * @var array
+	 */
+	protected $viewFormatToObjectNameMap = array(
+		'pdf.html' => 'KayStrobach\Pdf\View\PdfTemplateView'
+	);
+```
+
+This example uses the format pdf.html to make it easily possible to edit the template files with your favourite IDE.
+
+
+Example usage in a FLOW Package called Some.Package
 ----------------------------------------------------
 
 In a FLOW Layout you can wrap your generated HTML with the following ViewHelper and the output gets transformed into a PDF.
