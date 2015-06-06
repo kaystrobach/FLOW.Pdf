@@ -48,6 +48,8 @@ class PdfTemplateView extends TemplateView {
 	 * @return string
 	 */
 	public function render($actionName = NULL) {
+		$this->assign('PAGENO', '{PAGENO}');
+		$this->assign('nbpg', '{nbpg}');
 
 		/** @var \TYPO3\Flow\Http\Response $response */
 		$response = $this->controllerContext->getResponse();

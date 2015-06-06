@@ -35,6 +35,8 @@ class MPdfRenderer extends AbstractRenderer {
 	protected function convert($html = '') {
 		$mpdf=new \mPDF();
 		#$mpdf->debug = TRUE;
+		$mpdf->setAutoTopMargin = TRUE;
+		$mpdf->setAutoBottomMargin = TRUE;
 		$mpdf->WriteHTML($html);
 		$mpdf->Output($this->getOption('filename'), 'I');
 	}
