@@ -6,6 +6,7 @@ namespace KayStrobach\Pdf\ViewHelpers;
  *                                                                        *
  *                                                                        */
 
+use KayStrobach\Pdf\Renderer\Factory;
 use TYPO3\Flow\Annotations as Flow;
 use TYPO3\Flow\Mvc\Exception\StopActionException;
 
@@ -36,12 +37,8 @@ class PdfViewHelper extends \TYPO3\Fluid\Core\ViewHelper\AbstractViewHelper{
 	 */
 	public function render() {
 		if(!$this->arguments['disable']) {
-			if($this->arguments['renderer'] === 'mpdf') {
-				$renderer = new \KayStrobach\Pdf\ViewHelpers\Renderer\MPdfRenderer();
-			} else {
-				$renderer = new \KayStrobach\Pdf\ViewHelpers\Renderer\DomPdfRenderer();
-			}
 
+			$renderer = Factory::get($this->arguments['renderer']);
 
 			$renderer->init($this->arguments);
 			$renderer->render($this->renderChildren());

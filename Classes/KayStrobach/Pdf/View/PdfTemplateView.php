@@ -1,6 +1,7 @@
 <?php
 namespace KayStrobach\Pdf\View;
 
+use KayStrobach\Pdf\Renderer\Factory;
 use TYPO3\Flow\Annotations as Flow;
 use TYPO3\Fluid\View\TemplateView;
 
@@ -39,7 +40,7 @@ class PdfTemplateView extends TemplateView {
 
 	/**
 	 * @Flow\Inject
-	 * @var \KayStrobach\Pdf\ViewHelpers\Renderer\MPdfRenderer
+	 * @var \KayStrobach\Pdf\Renderer\MPdfRenderer
 	 */
 	protected $renderHelper;
 
@@ -54,11 +55,12 @@ class PdfTemplateView extends TemplateView {
 		/** @var \TYPO3\Flow\Http\Response $response */
 		$response = $this->controllerContext->getResponse();
 
-		$this->renderHelper->init($this->options);
+		$renderer = Factory::get($this->options['renderer']);
+		$renderer->init($this->options);
 
 		$response->setHeader('Content-Disposition', 'inline; filename="fname.pdf"');
 		$response->setHeader('Content-Type', 'application/pdf; name="fileName.pdf"');
 
-		return $this->renderHelper->render(parent::render($actionName));
+		return $renderer->render(parent::render($actionName));
 	}
 }

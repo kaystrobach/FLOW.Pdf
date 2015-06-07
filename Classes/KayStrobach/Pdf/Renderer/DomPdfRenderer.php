@@ -1,6 +1,6 @@
 <?php
 
-namespace KayStrobach\Pdf\ViewHelpers\Renderer;
+namespace KayStrobach\Pdf\Renderer;
 
 class DomPdfRenderer extends AbstractRenderer {
 
