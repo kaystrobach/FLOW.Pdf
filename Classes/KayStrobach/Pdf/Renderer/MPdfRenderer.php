@@ -46,7 +46,9 @@ class MPdfRenderer extends AbstractRenderer {
 		}
 
 		$mpdf=new \mPDF('', $this->getOption('papersize') . $orientation);
-		#$mpdf->debug = TRUE;
+
+		$mpdf->debug = $this->getOption('debug');
+
 		$mpdf->setAutoTopMargin = TRUE;
 		$mpdf->setAutoBottomMargin = TRUE;
 
