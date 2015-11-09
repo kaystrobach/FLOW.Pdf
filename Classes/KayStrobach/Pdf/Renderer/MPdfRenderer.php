@@ -14,6 +14,12 @@ class MPdfRenderer extends AbstractRenderer {
 	protected $environment;
 
 	/**
+	 * @var \TYPO3\Flow\Log\SystemLoggerInterface
+	 * @Flow\Inject
+	 */
+	protected $systemLogger;
+
+	/**
 	 *
 	 */
 	protected function initLibrary() {
@@ -33,10 +39,19 @@ class MPdfRenderer extends AbstractRenderer {
 	 *
 	 */
 	protected function convert($html = '') {
-		$mpdf=new \mPDF();
+		if($this->getOption('orientation') === 'landscape') {
+			$orientation = '-L';
+		} else {
+			$orientation = '';
+		}
+
+		$mpdf=new \mPDF('', $this->getOption('papersize') . $orientation);
 		#$mpdf->debug = TRUE;
 		$mpdf->setAutoTopMargin = TRUE;
 		$mpdf->setAutoBottomMargin = TRUE;
+
+		$this->systemLogger->log('Paperorientation: ' . $orientation);
+
 		$mpdf->WriteHTML($html);
 		$mpdf->Output($this->getOption('filename'), 'I');
 	}
