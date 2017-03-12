@@ -1,5 +1,0 @@
-
-KayStrobach\Pdf\View\PdfTemplateView:
-  properties:
-    renderingContext:
-      object: TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface
