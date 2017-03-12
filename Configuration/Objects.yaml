@@ -2,4 +2,4 @@
 KayStrobach\Pdf\View\PdfTemplateView:
   properties:
     renderingContext:
-      object: Neos\Fluid\Core\Rendering\RenderingContext
+      object: TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface
