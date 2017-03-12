@@ -9,7 +9,7 @@ namespace KayStrobach\Pdf\ViewHelpers;
 use KayStrobach\Pdf\Renderer\Factory;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Mvc\Exception\StopActionException;
-use \Neos\FluidAdaptor\Core\ViewHelper\AbstractViewHelper;
+use Neos\FluidAdaptor\Core\ViewHelper\AbstractViewHelper;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use Neos\FluidAdaptor\Core\Rendering\FlowAwareRenderingContextInterface;
 
