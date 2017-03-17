@@ -2,15 +2,18 @@
 namespace KayStrobach\Pdf\ViewHelpers;
 
 /*                                                                        *
- * This script belongs to the TYPO3 Flow package "SBS.LaPo".              *
+ * This script belongs to the TYPO3 Flow package "KayStrobach.Pdf".       *
  *                                                                        *
  *                                                                        */
 
 use KayStrobach\Pdf\Renderer\Factory;
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Flow\Mvc\Exception\StopActionException;
+use Neos\Flow\Annotations as Flow;
+use Neos\Flow\Mvc\Exception\StopActionException;
+use Neos\FluidAdaptor\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
+use Neos\FluidAdaptor\Core\Rendering\FlowAwareRenderingContextInterface;
 
-class PdfViewHelper extends \TYPO3\Fluid\Core\ViewHelper\AbstractViewHelper{
+class PdfViewHelper extends AbstractViewHelper{
 
 	/**
 	 * @var int
@@ -31,8 +34,22 @@ class PdfViewHelper extends \TYPO3\Fluid\Core\ViewHelper\AbstractViewHelper{
 	}
 
 	/**
+	 * @param RenderingContextInterface $renderingContext
+	 * @return void
+	 */
+	public function setRenderingContext(RenderingContextInterface $renderingContext)
+	{
+		$this->renderingContext = $renderingContext;
+		$this->templateVariableContainer = $renderingContext->getVariableProvider();
+		$this->viewHelperVariableContainer = $renderingContext->getViewHelperVariableContainer();
+		if ($renderingContext instanceof FlowAwareRenderingContextInterface) {
+			$this->controllerContext = $renderingContext->getControllerContext();
+		}
+	}
+
+	/**
 	 *
-	 * @throws \TYPO3\Flow\Mvc\Exception\StopActionException
+	 * @throws \Neos\Flow\Mvc\Exception\StopActionException
 	 * @return string the rendered string
 	 */
 	public function render() {

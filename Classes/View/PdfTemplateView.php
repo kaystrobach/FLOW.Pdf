@@ -2,8 +2,8 @@
 namespace KayStrobach\Pdf\View;
 
 use KayStrobach\Pdf\Renderer\Factory;
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Fluid\View\TemplateView;
+use Neos\Flow\Annotations as Flow;
+use Neos\FluidAdaptor\View\TemplateView;
 
 class PdfTemplateView extends TemplateView {
 	/**
@@ -52,7 +52,7 @@ class PdfTemplateView extends TemplateView {
 		$this->assign('PAGENO', '{PAGENO}');
 		$this->assign('nbpg', '{nbpg}');
 
-		/** @var \TYPO3\Flow\Http\Response $response */
+		/** @var \Neos\Flow\Http\Response $response */
 		$response = $this->controllerContext->getResponse();
 
 		$renderer = Factory::get($this->options['renderer']);

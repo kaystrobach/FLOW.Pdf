@@ -2,19 +2,19 @@
 
 namespace KayStrobach\Pdf\Renderer;
 
-use TYPO3\Flow\Annotations as Flow;
+use Neos\Flow\Annotations as Flow;
 
 
 class MPdfRenderer extends AbstractRenderer {
 
 	/**
 	 * @Flow\Inject
-	 * @var \TYPO3\Flow\Utility\Environment
+	 * @var \Neos\Flow\Utility\Environment
 	 */
 	protected $environment;
 
 	/**
-	 * @var \TYPO3\Flow\Log\SystemLoggerInterface
+	 * @var \Neos\Flow\Log\SystemLoggerInterface
 	 * @Flow\Inject
 	 */
 	protected $systemLogger;
