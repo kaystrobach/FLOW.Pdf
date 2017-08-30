@@ -1,12 +1,16 @@
 {
-	"name": "kaystrobach/pdf",
-	"type": "typo3-flow-package",
-	"description": "Convert HTML directly to PDF on the fly, using the mpdf or dompdf library.",
-	"require": {
-	},
-	"autoload":{
-		"psr-0":{
-			"KayStrobach\\Pdf":"Classes"
-		}
-	}
+    "name": "kaystrobach/pdf",
+    "type": "typo3-flow-package",
+    "description": "Convert HTML directly to PDF on the fly, using the mpdf or dompdf library.",
+    "require": [],
+    "autoload": {
+        "psr-0": {
+            "KayStrobach\\Pdf": "Classes"
+        }
+    },
+    "extra": {
+        "applied-flow-migrations": [
+            "TYPO3.FLOW3-201201261636"
+        ]
+    }
 }
