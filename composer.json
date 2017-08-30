@@ -34,7 +34,8 @@
             "Neos.Kickstart-20161124230102",
             "Neos.Kickstarter-20161125110814",
             "Neos.Flow-20161125124112",
-            "TYPO3.FluidAdaptor-20161130112935"
+            "TYPO3.FluidAdaptor-20161130112935",
+            "Neos.Flow-20170125103800"
         ]
     }
 }
