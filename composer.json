@@ -2,7 +2,9 @@
     "name": "kaystrobach/pdf",
     "type": "typo3-flow-package",
     "description": "Convert HTML directly to PDF on the fly, using the mpdf or dompdf library.",
-    "require": [],
+    "require": {
+        "neos/flow": "^4.1"
+    },
     "autoload": {
         "psr-0": {
             "KayStrobach\\Pdf": "Classes"
