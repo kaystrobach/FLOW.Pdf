@@ -3,7 +3,7 @@ namespace KayStrobach\Pdf\View;
 
 use KayStrobach\Pdf\Renderer\Factory;
 use Neos\Flow\Annotations as Flow;
-use TYPO3\Fluid\View\TemplateView;
+use Neos\FluidAdaptor\View\TemplateView;
 
 class PdfTemplateView extends TemplateView {
 	/**

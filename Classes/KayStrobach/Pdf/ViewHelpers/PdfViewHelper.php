@@ -10,7 +10,7 @@ use KayStrobach\Pdf\Renderer\Factory;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Mvc\Exception\StopActionException;
 
-class PdfViewHelper extends \TYPO3\Fluid\Core\ViewHelper\AbstractViewHelper{
+class PdfViewHelper extends \Neos\FluidAdaptor\Core\ViewHelper\AbstractViewHelper{
 
 	/**
 	 * @var int
