@@ -7,17 +7,20 @@ namespace KayStrobach\Pdf\ViewHelpers;
  *                                                                        */
 
 use KayStrobach\Pdf\Renderer\Factory;
-use Neos\Flow\Annotations as Flow;
-use Neos\Flow\Mvc\Exception\StopActionException;
+use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Flow\Mvc\Exception\StopActionException;
 
-class PdfViewHelper extends \Neos\FluidAdaptor\Core\ViewHelper\AbstractViewHelper{
+class PdfViewHelper extends \TYPO3\Fluid\Core\ViewHelper\AbstractViewHelper{
 
 	/**
 	 * @var int
 	 */
 	protected $errorReporting = 0;
 
-	function initializeArguments() {
+    /**
+     * @throws \TYPO3\Fluid\Core\ViewHelper\Exception
+     */
+	public function initializeArguments() {
 		$this->registerArgument('debug',               'boolean', 'debug or not',                0, 0);
 		$this->registerArgument('disable',             'boolean', 'disable PDF, output html',    0, 0);
 		$this->registerArgument('filename',            'string',  'filename for download',       0, 'pdf-' . time() . '.pdf');
@@ -32,19 +35,18 @@ class PdfViewHelper extends \Neos\FluidAdaptor\Core\ViewHelper\AbstractViewHelpe
 
 	/**
 	 *
-	 * @throws \Neos\Flow\Mvc\Exception\StopActionException
+	 * @throws \TYPO3\Flow\Mvc\Exception\StopActionException
 	 * @return string the rendered string
 	 */
 	public function render() {
-		if(!$this->arguments['disable']) {
+		if($this->arguments['disable']) {
+            return $this->renderChildren();
+        }
 
-			$renderer = Factory::get($this->arguments['renderer']);
+        $renderer = Factory::get($this->arguments['renderer']);
 
-			$renderer->init($this->arguments);
-			$renderer->render($this->renderChildren());
-		} else {
-			return $this->renderChildren();
-		}
+        $renderer->init($this->arguments);
+        $renderer->render($this->renderChildren());
 
 		//use instead of exit ;)
 		throw new StopActionException();
