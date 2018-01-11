@@ -2,7 +2,10 @@
 
 namespace KayStrobach\Pdf\Renderer;
 
+use Mpdf\Mpdf;
+use Mpdf\Output\Destination;
 use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Flow\Mvc\Exception\StopActionException;
 
 
 class MPdfRenderer extends AbstractRenderer {
@@ -19,42 +22,78 @@ class MPdfRenderer extends AbstractRenderer {
 	 */
 	protected $systemLogger;
 
+    /**
+     * @var \KayStrobach\Pdf\Log\Logger
+     * @Flow\Inject
+     */
+    protected $psrLogger;
+
 	/**
 	 *
 	 */
 	protected function initLibrary() {
-		if(!class_exists('mPDF', FALSE)) {
-			$autoloadPath = FLOW_PATH_PACKAGES . 'Libraries/mpdf/mpdf/mpdf.php';
-			define('_MPDF_TTFONTDATAPATH', $this->environment->getPathToTemporaryDirectory());
-			define('_MPDF_TEMP_PATH', $this->environment->getPathToTemporaryDirectory());
-			if(is_file($autoloadPath)) {
-				require_once($autoloadPath);
-			} else {
-				throw new \Exception('please add mpdf/mpdf to your composer.json and install it');
-			}
-		}
+	    #if (!defined('_MPDF_TTFONTDATAPATH')) {
+        #    define('_MPDF_TTFONTDATAPATH', $this->environment->getPathToTemporaryDirectory());
+        #}
+        #if (!defined('_MPDF_TEMP_PATH')) {
+        #    define('_MPDF_TEMP_PATH', $this->environment->getPathToTemporaryDirectory());
+        #}
 	}
 
-	/**
-	 *
-	 */
+    /**
+     * @param string $html html code to render into an pdf
+     * @throws \Mpdf\MpdfException
+     * @throws \Exception
+     * @return string
+     */
 	protected function convert($html = '') {
 		if($this->getOption('orientation') === 'landscape') {
-			$orientation = '-L';
+			$orientation = 'L';
 		} else {
-			$orientation = '';
+			$orientation = 'P';
 		}
 
-		$mpdf=new \mPDF('', $this->getOption('papersize') . $orientation);
+		$mpdfOptions = [
+            'mode' => 'utf-8',
+            'format' => $this->getOption('papersize'),
+            'orientation' => $orientation,
+            'setAutoTopMargin' => true,
+            'setAutoBottomMargin' => true,
+            'debug' => $this->getOption('debug'),
+            'debugFonts' => $this->getOption('debug'),
+            'showStats' => $this->getOption('debug'),
+            'simpleTables' => true,
+            'CSSselectMedia' => 'screen',
+        ];
 
-		$mpdf->debug = $this->getOption('debug');
+        $mpdf = new Mpdf($mpdfOptions);
+        $mpdf->setLogger($this->psrLogger);
+        $mpdf->SetTitle($this->getOption('filename'));
+        $mpdf->SetCreator('KayStrobach.Pdf via https://github.com/kaystrobach/Flow.Pdf');
+        $mpdf->SetSubject($this->getOption('filename'));
+        $mpdf->SetKeywords($this->getOption('filename'));
 
-		$mpdf->setAutoTopMargin = TRUE;
-		$mpdf->setAutoBottomMargin = TRUE;
-
-		$this->systemLogger->log('Paperorientation: ' . $orientation);
+		$this->systemLogger->log(
+		    'mPDF Options',
+            LOG_INFO,
+            $mpdfOptions
+        );
 
 		$mpdf->WriteHTML($html);
-		$mpdf->Output($this->getOption('filename'), 'I');
+
+		$this->systemLogger->log(
+		    'mPDF Content',
+            LOG_DEBUG,
+            $html
+        );
+        //$this->getOption('filename'), 'I'
+		return $mpdf->Output(FLOW_PATH_DATA . 'output.pdf', Destination::FILE);
+
+        $this->systemLogger->log(
+            'mPDF done',
+            LOG_DEBUG
+        );
+
+        throw new StopActionException();
 	}
 }

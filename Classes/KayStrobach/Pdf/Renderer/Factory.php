@@ -8,19 +8,20 @@
 
 namespace KayStrobach\Pdf\Renderer;
 
-
 class Factory {
-	/**
-	 * @param string $rendererName
-	 *
-	 * @return DomPdfRenderer|AbstractRenderer
-	 */
+    /**
+     * @param string $rendererName
+     * @throws \InvalidArgumentException
+     *
+     * @return AbstractRenderer
+     */
 	public static function get($rendererName) {
-		if(strtolower($rendererName) === 'mpdf') {
-			$renderer = new \KayStrobach\Pdf\Renderer\MPdfRenderer();
-		} else {
-			$renderer = new \KayStrobach\Pdf\Renderer\DomPdfRenderer();
+		if(strtolower($rendererName) !== 'mpdf') {
+            throw new \InvalidArgumentException(
+                $rendererName . 'not supported anymore.',
+                230948094368
+            );
 		}
-		return $renderer;
+		return new MPdfRenderer();
 	}
 }

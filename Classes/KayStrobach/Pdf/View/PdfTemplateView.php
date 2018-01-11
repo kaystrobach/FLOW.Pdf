@@ -25,15 +25,15 @@ class PdfTemplateView extends TemplateView {
 		'templatePathAndFilename' => array(NULL, 'Path and filename of the template file. If set,  overrides the templatePathAndFilenamePattern', 'string'),
 		'layoutPathAndFilename' => array(NULL, 'Path and filename of the layout file. If set, overrides the layoutPathAndFilenamePattern', 'string'),
 
-		'debug'             => array(FALSE,           'debug or not',                'boolean'),
-		'disable'           => array(FALSE,           'disable PDF, output html',    'boolean'),
+		'debug'             => array(false,           'debug or not',                'boolean'),
+		'disable'           => array(false,           'disable PDF, output html',    'boolean'),
 		'filename'          => array('pdf-@time.pdf', 'filename for download',       'string'),
 		'papersize'         => array('A4',            'set the papersize',           'string'),
 		'orientation'       => array('portrait',      'set the orientation',         'string'),
 		'basepath'          => array('',              'set the basepath',            'string'),
 		'dpi'               => array(120,              'set the quality of the pdf',  'integer'),
-		'enableHtml5Parser' => array(TRUE,            'html5parser or not',          'boolean'),
-		'enableCssFloat'    => array(TRUE,            'css floating or not',         'boolean'),
+		'enableHtml5Parser' => array(true,            'html5parser or not',          'boolean'),
+		'enableCssFloat'    => array(true,            'css floating or not',         'boolean'),
 		'renderer'          => array('MPdf',          'define the pdf renderer',     'string'),
 
 );
@@ -54,6 +54,10 @@ class PdfTemplateView extends TemplateView {
 
 		/** @var \TYPO3\Flow\Http\Response $response */
 		$response = $this->controllerContext->getResponse();
+
+		if ($this->options['disable']) {
+		    return parent::render($actionName);
+        }
 
 		$renderer = Factory::get($this->options['renderer']);
 		$renderer->init($this->options);

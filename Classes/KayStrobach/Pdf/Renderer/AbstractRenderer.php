@@ -37,7 +37,7 @@ abstract class AbstractRenderer {
 	 * @param string $html
 	 */
 	public function render($html = '') {
-		$this->prepareEnvironment();
+        $this->prepareEnvironment();
 		$buffer = $this->convert($html);
 		$this->cleanupEnvironment();
 		return $buffer;
@@ -49,7 +49,9 @@ abstract class AbstractRenderer {
 	protected  function prepareEnvironment() {
 		ini_set('memory_limit', '512M');
 		$this->disableErrorReporting();
-		ob_end_clean();
+		if (ob_get_length()) {
+            ob_end_clean();
+        }
 		$this->initLibrary();
 	}
 
@@ -58,7 +60,9 @@ abstract class AbstractRenderer {
 	 */
 	protected  function disableErrorReporting() {
 		$this->errorReporting = error_reporting();
-		error_reporting(0);
+		error_reporting(E_ALL & ~E_NOTICE);
+        error_reporting(E_ALL);
+        ini_set('display_errors', 1);
 	}
 
 	/**
