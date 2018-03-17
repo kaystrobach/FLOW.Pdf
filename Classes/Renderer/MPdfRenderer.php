@@ -24,7 +24,7 @@ class MPdfRenderer extends AbstractRenderer {
 	 */
 	protected function initLibrary() {
 		if(!class_exists('mPDF', FALSE)) {
-			$autoloadPath = FLOW_PATH_PACKAGES . 'Libraries/mpdf/mpdf/mpdf.php';
+			$autoloadPath = FLOW_PATH_PACKAGES . 'Libraries/mpdf/mpdf/src/Mpdf.php';
 			define('_MPDF_TTFONTDATAPATH', $this->environment->getPathToTemporaryDirectory());
 			define('_MPDF_TEMP_PATH', $this->environment->getPathToTemporaryDirectory());
 			if(is_file($autoloadPath)) {
@@ -45,7 +45,7 @@ class MPdfRenderer extends AbstractRenderer {
 			$orientation = '';
 		}
 
-		$mpdf=new \mPDF('', $this->getOption('papersize') . $orientation);
+		$mpdf = new \Mpdf\Mpdf(array('orientation' => $this->getOption('papersize') . $orientation));
 
 		$mpdf->debug = $this->getOption('debug');
 
