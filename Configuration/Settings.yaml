@@ -1,7 +1,7 @@
 #                                                                        #
-# Configuration for the TYPO3 Flow Framework                             #
+# Configuration for the Neos Flow Framework                             #
 #                                                                        #
-# This file contains the default base configuration for the TYPO3 Flow   #
+# This file contains the default base configuration for the Neos Flow   #
 # Framework. Don't modify this file but add configuration options to     #
 # the Settings.yaml file in the in global Configuration/ directory       #
 # instead.                                                               #

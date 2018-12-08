@@ -17,7 +17,7 @@ The recent version of the package contains a new view.
 This view can be included directly in the controller e.g. like this:
 
 ```
-class FormulareController extends \TYPO3\Flow\Mvc\Controller\ActionController {
+class FormulareController extends \Neos\Flow\Mvc\Controller\ActionController {
 	/**
 	 * @Flow\Inject
 	 * @var \SBS\LaPo\Domain\Repository\StudentRepository

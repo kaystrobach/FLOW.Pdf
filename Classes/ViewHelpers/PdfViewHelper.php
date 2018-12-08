@@ -2,15 +2,15 @@
 namespace KayStrobach\Pdf\ViewHelpers;
 
 /*                                                                        *
- * This script belongs to the TYPO3 Flow package "SBS.LaPo".              *
+ * This script belongs to the Neos Flow package "SBS.LaPo".              *
  *                                                                        *
  *                                                                        */
 
 use KayStrobach\Pdf\Renderer\Factory;
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Flow\Mvc\Exception\StopActionException;
+use Neos\Flow\Annotations as Flow;
+use Neos\Flow\Mvc\Exception\StopActionException;
 
-class PdfViewHelper extends \TYPO3\Fluid\Core\ViewHelper\AbstractViewHelper{
+class PdfViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper{
 
 	/**
 	 * @var int
@@ -18,7 +18,7 @@ class PdfViewHelper extends \TYPO3\Fluid\Core\ViewHelper\AbstractViewHelper{
 	protected $errorReporting = 0;
 
     /**
-     * @throws \TYPO3\Fluid\Core\ViewHelper\Exception
+     * @throws \TYPO3Fluid\Fluid\\Core\ViewHelper\Exception
      */
 	public function initializeArguments() {
 		$this->registerArgument('debug',               'boolean', 'debug or not',                0, 0);
@@ -35,7 +35,7 @@ class PdfViewHelper extends \TYPO3\Fluid\Core\ViewHelper\AbstractViewHelper{
 
 	/**
 	 *
-	 * @throws \TYPO3\Flow\Mvc\Exception\StopActionException
+	 * @throws \Neos\Flow\Mvc\Exception\StopActionException
 	 * @return string the rendered string
 	 */
 	public function render() {
