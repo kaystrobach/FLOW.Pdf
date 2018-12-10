@@ -1,11 +1,6 @@
 <?php
 namespace KayStrobach\Pdf\ViewHelpers;
 
-/*                                                                        *
- * This script belongs to the Neos Flow package "SBS.LaPo".              *
- *                                                                        *
- *                                                                        */
-
 use KayStrobach\Pdf\Renderer\Factory;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Mvc\Exception\StopActionException;

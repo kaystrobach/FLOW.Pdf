@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: kay
- * Date: 07.06.15
- * Time: 18:39
- */
 
 namespace KayStrobach\Pdf\Renderer;
-
 
 class Factory {
 	/**

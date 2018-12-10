@@ -1,5 +1,0 @@
-
-KayStrobach\Pdf\View\PdfTemplateView:
-  properties:
-    renderingContext:
-      object: Neos\FluidAdaptor\Core\Rendering\RenderingContext
