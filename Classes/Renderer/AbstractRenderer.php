@@ -11,7 +11,7 @@ abstract class AbstractRenderer {
 	/**
 	 * @var integer
 	 */
-	protected $errorReporting = NULL;
+	protected $errorReporting = null;
 
 	/**
 	 * @param array $options
@@ -25,7 +25,7 @@ abstract class AbstractRenderer {
 	 * @param null $default
 	 * @return null
 	 */
-	public function getOption($name, $default = NULL) {
+	public function getOption($name, $default = null) {
 		if(array_key_exists($name, $this->options)) {
 			return $this->options[$name];
 		} else {
