@@ -132,15 +132,26 @@ class PdfTemplateView extends TemplateView implements ViewInterface{
         $this->assign('PAGENO', '{PAGENO}');
         $this->assign('nbpg', '{nbpg}');
 
-        /** @var \Neos\Flow\Http\Response $response */
-        $response = $this->controllerContext->getResponse();
 
         $renderer = Factory::get($this->options['renderer']);
         $renderer->init($this->options);
 
-        $response->setHeader('Content-Disposition', 'inline; filename="fname.pdf"');
-        $response->setHeader('Content-Type', 'application/pdf; name="fileName.pdf"');
+        $this->modifyHeader();
+        return $renderer->render(parent::render());
+    }
 
-        return $renderer->render(parent::render($actionName));
+    protected function modifyHeader()
+    {
+        if (!method_exists($this->controllerContext, 'getResponse')) {
+            return;
+        }
+
+        /** @var \Neos\Flow\Http\Response $response */
+
+        $filename = $this->getOption('filename');
+
+        $response = $this->controllerContext->getResponse();
+        $response->setHeader('Content-Disposition', 'inline; filename="' . $filename . '"');
+        $response->setHeader('Content-Type', 'application/pdf; name="fileName.pdf"');
     }
 }

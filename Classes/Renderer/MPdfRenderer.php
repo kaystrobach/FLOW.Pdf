@@ -55,6 +55,6 @@ class MPdfRenderer extends AbstractRenderer {
 		$this->systemLogger->log('Paperorientation: ' . $orientation);
 
 		$mpdf->WriteHTML($html);
-		$mpdf->Output($this->getOption('filename'), 'I');
+		return $mpdf->Output($this->getOption('filename'), 'S');
 	}
 }
