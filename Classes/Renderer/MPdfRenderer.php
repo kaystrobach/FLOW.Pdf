@@ -2,6 +2,8 @@
 
 namespace KayStrobach\Pdf\Renderer;
 
+use Mpdf\Mpdf;
+use Mpdf\Output\Destination;
 use Neos\Flow\Annotations as Flow;
 
 
@@ -23,16 +25,7 @@ class MPdfRenderer extends AbstractRenderer {
 	 *
 	 */
 	protected function initLibrary() {
-		if(!class_exists('mPDF', FALSE)) {
-			$autoloadPath = FLOW_PATH_PACKAGES . 'Libraries/mpdf/mpdf/mpdf.php';
-			define('_MPDF_TTFONTDATAPATH', $this->environment->getPathToTemporaryDirectory());
-			define('_MPDF_TEMP_PATH', $this->environment->getPathToTemporaryDirectory());
-			if(is_file($autoloadPath)) {
-				require_once($autoloadPath);
-			} else {
-				throw new \Exception('please add mpdf/mpdf to your composer.json and install it');
-			}
-		}
+		$this->systemLogger->log('You are still using deprecated initLibrary call', LOG_DEBUG);
 	}
 
 	/**
@@ -45,9 +38,15 @@ class MPdfRenderer extends AbstractRenderer {
 			$orientation = '';
 		}
 
-		$mpdf=new \mPDF('', $this->getOption('papersize') . $orientation);
+		$mpdf = new Mpdf(
+		    [
+		        '',
+                $this->getOption('papersize') . $orientation
+            ]
+        );
 
 		$mpdf->debug = $this->getOption('debug');
+        $mpdf->PDFA = true;
 
 		$mpdf->setAutoTopMargin = TRUE;
 		$mpdf->setAutoBottomMargin = TRUE;
@@ -55,6 +54,9 @@ class MPdfRenderer extends AbstractRenderer {
 		$this->systemLogger->log('Paperorientation: ' . $orientation);
 
 		$mpdf->WriteHTML($html);
-		return $mpdf->Output($this->getOption('filename'), 'S');
+		return $mpdf->Output(
+		    '',
+            Destination::STRING_RETURN
+        );
 	}
 }

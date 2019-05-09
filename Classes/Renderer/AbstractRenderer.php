@@ -28,9 +28,8 @@ abstract class AbstractRenderer {
 	public function getOption($name, $default = null) {
 		if(array_key_exists($name, $this->options)) {
 			return $this->options[$name];
-		} else {
-			return $default;
 		}
+        return $default;
 	}
 
 	/**

@@ -5,6 +5,9 @@
     "require": {
         "neos/flow": "^4.1"
     },
+    "suggest": {
+        "mpdf/mpdf": "Use it as def~8.0"
+    },
     "autoload": {
         "psr-4": {
             "KayStrobach\\Pdf\\": "Classes"
