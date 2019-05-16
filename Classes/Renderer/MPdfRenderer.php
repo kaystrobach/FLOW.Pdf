@@ -38,25 +38,30 @@ class MPdfRenderer extends AbstractRenderer {
 			$orientation = '';
 		}
 
-		$mpdf = new Mpdf(
-		    [
-		        '',
-                $this->getOption('papersize') . $orientation
-            ]
-        );
+		try {
+            $mpdf = new Mpdf(
+                [
+                    '',
+                    $this->getOption('papersize') . $orientation
+                ]
+            );
 
-		$mpdf->debug = $this->getOption('debug');
-        $mpdf->PDFA = true;
+            $mpdf->debug = $this->getOption('debug');
+            $mpdf->showImageErrors = true;
 
-		$mpdf->setAutoTopMargin = TRUE;
-		$mpdf->setAutoBottomMargin = TRUE;
+            $mpdf->setAutoTopMargin = TRUE;
+            $mpdf->setAutoBottomMargin = TRUE;
 
-		$this->systemLogger->log('Paperorientation: ' . $orientation);
+            $this->systemLogger->log('Paperorientation: ' . $orientation);
 
-		$mpdf->WriteHTML($html);
-		return $mpdf->Output(
-		    '',
-            Destination::STRING_RETURN
-        );
+            $mpdf->WriteHTML($html);
+            return $mpdf->Output(
+                '',
+                Destination::STRING_RETURN
+            );
+        } catch (\Mpdf\MpdfException $e) {
+		    $this->systemLogger->log($e->getMessage());
+        }
+        return null;
 	}
 }
