@@ -39,10 +39,16 @@ class MPdfRenderer extends AbstractRenderer {
 		}
 
 		try {
+		    $tempDir = FLOW_PATH_TEMPORARY . '/KayStrobach.Pdf';
+            if (!@mkdir($tempDir, 0777, true) && !is_dir($tempDir)) {
+                throw new \InvalidArgumentException('Could not create TempDir ' . $tempDir);
+            }
+
             $mpdf = new Mpdf(
                 [
-                    '',
-                    $this->getOption('papersize') . $orientation
+                    'mode' => '',
+                    'format' => $this->getOption('papersize') . $orientation,
+                    'tempDir' => $tempDir
                 ]
             );
 
