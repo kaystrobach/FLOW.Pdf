@@ -3,7 +3,8 @@
     "type": "neos-package",
     "description": "Convert HTML directly to PDF on the fly, using the mpdf or dompdf library.",
     "require": {
-        "neos/flow": "^4.1"
+        "neos/flow": "^4.1",
+        "mpdf/mpdf": "~8.0"
     },
     "suggest": {
         "mpdf/mpdf": "Use it as def~8.0"
