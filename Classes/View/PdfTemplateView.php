@@ -3,10 +3,12 @@ namespace KayStrobach\Pdf\View;
 
 use KayStrobach\Pdf\Renderer\Factory;
 use Neos\Flow\Annotations as Flow;
+use Neos\FluidAdaptor\View\StandaloneView;
 use Neos\FluidAdaptor\View\TemplateView;
 use Neos\Flow\Mvc\View\ViewInterface;
 
-class PdfTemplateView extends TemplateView implements ViewInterface{
+class PdfTemplateView extends StandaloneView implements ViewInterface
+{
     /**
      * @var array
      */
