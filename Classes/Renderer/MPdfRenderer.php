@@ -21,6 +21,12 @@ class MPdfRenderer extends AbstractRenderer {
 	 */
 	protected $systemLogger;
 
+    /**
+     * @Flow\InjectConfiguration
+     * @var array
+     */
+	protected $settings;
+
 	/**
 	 *
 	 */
@@ -32,10 +38,9 @@ class MPdfRenderer extends AbstractRenderer {
 	 *
 	 */
 	protected function convert($html = '') {
-		if($this->getOption('orientation') === 'landscape') {
+        $orientation = '';
+	    if($this->getOption('orientation') === 'landscape') {
 			$orientation = '-L';
-		} else {
-			$orientation = '';
 		}
 
 		try {
@@ -51,6 +56,13 @@ class MPdfRenderer extends AbstractRenderer {
                     'tempDir' => $tempDir
                 ]
             );
+
+            $this->systemLogger->log($this->settings['Renderers']['Mpdf']['WatermarkText']);
+
+            if ($this->settings['Renderers']['Mpdf']['WatermarkText'] !== '') {
+                $mpdf->SetWatermarkText($this->settings['Renderers']['Mpdf']['WatermarkText']);
+                $mpdf->showWatermarkText = true;
+            }
 
             $mpdf->debug = $this->getOption('debug');
             $mpdf->showImageErrors = true;
