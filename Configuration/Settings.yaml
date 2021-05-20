@@ -16,3 +16,9 @@ Neos:
           - '.*'
         dompdf:
           - '.*'
+
+KayStrobach:
+  Pdf:
+    Renderers:
+      Mpdf:
+        WatermarkText: 
