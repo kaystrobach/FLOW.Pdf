@@ -17,7 +17,7 @@ class MPdfRenderer extends AbstractRenderer
     protected $environment;
 
     /**
-     * @var \Neos\Flow\Log\SystemLoggerInterface
+     * @var \Neos\Flow\Log\PsrSystemLoggerInterface
      * @Flow\Inject
      */
     protected $systemLogger;
@@ -33,7 +33,7 @@ class MPdfRenderer extends AbstractRenderer
      */
     protected function initLibrary()
     {
-        $this->systemLogger->log('You are still using deprecated initLibrary call', LOG_DEBUG);
+        $this->systemLogger->debug('You are still using deprecated initLibrary call');
     }
 
     /**
@@ -60,7 +60,7 @@ class MPdfRenderer extends AbstractRenderer
                 ]
             );
 
-            $this->systemLogger->log($this->settings['Renderers']['Mpdf']['WatermarkText']);
+            $this->systemLogger->debug($this->settings['Renderers']['Mpdf']['WatermarkText']);
 
             if ($this->settings['Renderers']['Mpdf']['WatermarkText'] !== '') {
                 $mpdf->SetWatermarkText($this->settings['Renderers']['Mpdf']['WatermarkText']);
@@ -73,7 +73,7 @@ class MPdfRenderer extends AbstractRenderer
             $mpdf->setAutoTopMargin = true;
             $mpdf->setAutoBottomMargin = true;
 
-            $this->systemLogger->log('Paperorientation: ' . $orientation);
+            $this->systemLogger->debug('Paperorientation: ' . $orientation);
 
             $mpdf->WriteHTML($html);
             return $mpdf->Output(
@@ -81,7 +81,7 @@ class MPdfRenderer extends AbstractRenderer
                 Destination::STRING_RETURN
             );
         } catch (\Mpdf\MpdfException $e) {
-            $this->systemLogger->log($e->getMessage());
+            $this->systemLogger->emergency($e->getMessage());
         }
         return null;
     }
