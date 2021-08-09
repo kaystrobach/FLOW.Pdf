@@ -67,6 +67,8 @@ class MPdfRenderer extends AbstractRenderer
                 $mpdf->showWatermarkText = true;
             }
 
+            $mpdf->showWatermarkImage = true;
+            
             $mpdf->debug = $this->getOption('debug');
             $mpdf->showImageErrors = true;
 
