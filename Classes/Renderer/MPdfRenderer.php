@@ -60,22 +60,28 @@ class MPdfRenderer extends AbstractRenderer
                 ]
             );
 
-            $this->systemLogger->debug($this->settings['Renderers']['Mpdf']['WatermarkText']);
-
             if ($this->settings['Renderers']['Mpdf']['WatermarkText'] !== '') {
                 $mpdf->SetWatermarkText($this->settings['Renderers']['Mpdf']['WatermarkText']);
                 $mpdf->showWatermarkText = true;
             }
 
             $mpdf->showWatermarkImage = true;
-            
+
             $mpdf->debug = $this->getOption('debug');
             $mpdf->showImageErrors = true;
 
             $mpdf->setAutoTopMargin = true;
             $mpdf->setAutoBottomMargin = true;
 
-            $this->systemLogger->debug('Paperorientation: ' . $orientation);
+            $this->systemLogger->debug(
+                'Pdf settings: ',
+                [
+                    'watermark' => $this->settings['Renderers']['Mpdf']['WatermarkText'],
+                    'tempDir' => $tempDir,
+                    'debug' => $mpdf->debug,
+                    'orientation' => $mpdf->CurOrientation
+                ]
+            );
 
             $mpdf->WriteHTML($html);
             return $mpdf->Output(

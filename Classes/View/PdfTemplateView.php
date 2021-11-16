@@ -1,4 +1,5 @@
 <?php
+
 namespace KayStrobach\Pdf\View;
 
 use KayStrobach\Pdf\Renderer\Factory;
@@ -129,7 +130,8 @@ class PdfTemplateView extends StandaloneView implements ViewInterface
      * @param string $actionName
      * @return string
      */
-    public function render($actionName = null) {
+    public function render($actionName = null)
+    {
         $this->assign('PAGENO', '{PAGENO}');
         $this->assign('nbpg', '{nbpg}');
 
@@ -151,8 +153,9 @@ class PdfTemplateView extends StandaloneView implements ViewInterface
 
         $filename = $this->getOption('filename');
 
-        $response = $this->controllerContext->getResponse();
-        $response->setHeader('Content-Disposition', 'inline; filename="' . $filename . '"');
-        $response->setHeader('Content-Type', 'application/pdf; name="fileName.pdf"');
+        $response = $this->controllerContext->getResponse()->setContentType('application/pdf; name="' . $filename . '"');
+
+        #$response->setHeader('Content-Disposition', 'inline; filename="' . $filename . '"');
+        #$response->setHeader('Content-Type', 'application/pdf; name="fileName.pdf"');
     }
 }

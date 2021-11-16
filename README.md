@@ -6,12 +6,12 @@ To achieve the on the fly rendering easily it uses a fluid viewhelper.
 
 You need one of these package installed via composer, the package itself checks if the library is missing and asks you to install it.
 
-* dompdf/dompdf
+* ~~dompdf/dompdf~~ (deprecated)
 * mpdf/mpdf
 
 
-Controller Usage
-----------------
+Controller Usage - do not use the viewHelper anymore, stick to the dedicated view!
+-----------------------------------------------------------------------------------
 
 The recent version of the package contains a new view.
 This view can be included directly in the controller e.g. like this:
