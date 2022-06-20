@@ -17,12 +17,6 @@ class MPdfRenderer extends AbstractRenderer
     protected $environment;
 
     /**
-     * @var \Neos\Flow\Log\PsrSystemLoggerInterface
-     * @Flow\Inject
-     */
-    protected $systemLogger;
-
-    /**
      * @Flow\InjectConfiguration
      * @var array
      */
@@ -33,7 +27,6 @@ class MPdfRenderer extends AbstractRenderer
      */
     protected function initLibrary()
     {
-        $this->systemLogger->debug('You are still using deprecated initLibrary call');
     }
 
     /**
@@ -73,23 +66,13 @@ class MPdfRenderer extends AbstractRenderer
             $mpdf->setAutoTopMargin = true;
             $mpdf->setAutoBottomMargin = true;
 
-            $this->systemLogger->debug(
-                'Pdf settings: ',
-                [
-                    'watermark' => $this->settings['Renderers']['Mpdf']['WatermarkText'],
-                    'tempDir' => $tempDir,
-                    'debug' => $mpdf->debug,
-                    'orientation' => $mpdf->CurOrientation
-                ]
-            );
-
             $mpdf->WriteHTML($html);
             return $mpdf->Output(
                 '',
                 Destination::STRING_RETURN
             );
         } catch (\Mpdf\MpdfException $e) {
-            $this->systemLogger->emergency($e->getMessage());
+            throw $e;
         }
         return null;
     }
