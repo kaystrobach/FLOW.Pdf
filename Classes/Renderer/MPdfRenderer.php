@@ -2,8 +2,6 @@
 
 namespace KayStrobach\Pdf\Renderer;
 
-use Mpdf\Config\ConfigVariables;
-use Mpdf\Config\FontVariables;
 use Mpdf\Mpdf;
 use Mpdf\Output\Destination;
 use Neos\Flow\Annotations as Flow;
@@ -47,28 +45,14 @@ class MPdfRenderer extends AbstractRenderer
                 throw new \InvalidArgumentException('Could not create TempDir ' . $tempDir);
             }
 
-            $defaultConfig = (new ConfigVariables())->getDefaults();
-            $fontDirs = $defaultConfig['fontDir'];
-
-            $defaultFontConfig = (new FontVariables())->getDefaults();
-            $fontData = $defaultFontConfig['fontdata'];
-
-            $optionsFromSettings = $this->settings['Renderers']['Mpdf']['options'];
-
-            $config = array_merge_recursive(
-                [
-                    'fontDir' => $fontDirs,
-                    'fontdata' => $fontData,
-                ],
-                $optionsFromSettings,
+            $mpdf = new Mpdf(
                 [
                     'mode' => '',
                     'format' => $this->getOption('papersize') . $orientation,
                     'tempDir' => $tempDir,
+                    'default_font' => 'dejavusans'
                 ]
             );
-
-            $mpdf = new Mpdf($config);
 
             if ($this->settings['Renderers']['Mpdf']['WatermarkText'] !== '') {
                 $mpdf->SetWatermarkText($this->settings['Renderers']['Mpdf']['WatermarkText']);
