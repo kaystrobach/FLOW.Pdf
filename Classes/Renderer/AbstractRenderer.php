@@ -60,7 +60,9 @@ abstract class AbstractRenderer
     protected function disableErrorReporting(): void
     {
         $this->errorReporting = error_reporting();
-        error_reporting(0);
+        if (!$this->getOption('debug')) {
+            error_reporting(0);
+        }
     }
 
     /**

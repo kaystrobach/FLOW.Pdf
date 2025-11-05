@@ -22,4 +22,3 @@ KayStrobach:
     Renderers:
       Mpdf:
         WatermarkText: 
-        options: {}
