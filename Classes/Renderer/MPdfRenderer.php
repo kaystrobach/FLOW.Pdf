@@ -58,6 +58,10 @@ class MPdfRenderer extends AbstractRenderer
                 $mpdf->SetWatermarkText($this->settings['Renderers']['Mpdf']['WatermarkText']);
                 $mpdf->showWatermarkText = true;
             }
+            if ($this->getOption('watermarkText') !== null) {
+                $mpdf->SetWatermarkText($this->getOption('watermarkText'));
+                $mpdf->showWatermarkText = true;
+            }
 
             $mpdf->showWatermarkImage = true;
 

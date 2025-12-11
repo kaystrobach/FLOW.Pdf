@@ -118,6 +118,11 @@ class PdfTemplateView extends StandaloneView implements ViewInterface
             'define the pdf renderer',
             'string'
         ],
+        'watermarkText' => [
+            null,
+            'define the watermark text',
+            'string'
+        ],
     ];
 
     /**
