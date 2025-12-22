@@ -145,7 +145,7 @@ class PdfTemplateView extends StandaloneView implements ViewInterface
         $renderer->init($this->options);
 
         $this->modifyHeader();
-        return $renderer->render(parent::render());
+        return $renderer->render(parent::render($actionName));
     }
 
     protected function modifyHeader()
